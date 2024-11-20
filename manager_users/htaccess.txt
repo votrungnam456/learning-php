@@ -1,0 +1,19 @@
+# Ngăn truy cập và hiển thị lỗi 403 Forbidden
+Options -Indexes
+# Chuyển hướng một trang cụ thể
+Redirect 301 /old-page.html http://www.example.com/new-page.html
+
+; # Chuyển hướng toàn bộ trang từ HTTP sang HTTPS
+; RewriteEngine On
+; RewriteCond %{HTTPS} off
+; RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Ngăn truy cập vào file .env
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Cấu hình trang lỗi tùy chỉnh
+ErrorDocument 404 modules/errors/404.php
+; ErrorDocument 403 /error-pages/403.html
+; ErrorDocument 500 /error-pages/500.html
